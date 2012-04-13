@@ -17,16 +17,17 @@ public class GameOfLife extends Activity {
 
 		setContentView(R.layout.life_layout);
 		mGameView = (GameView) findViewById(R.id.life_view);
-		mGameView.setState(GameView.GameState.MODELING);
+		final GameView.GameThread thread = mGameView.getThread();
+//		thread.setState(GameView.GameState.MODELING);
 
 		final ToggleButton button = (ToggleButton) findViewById(R.id.button);
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				if (button.isChecked()) {
-					mGameView.setState(GameView.GameState.RUNNING);
+					thread.setState(GameView.GameState.RUNNING);
 				} else {
-					mGameView.setState(GameView.GameState.MODELING);
+					thread.setState(GameView.GameState.MODELING);
 				}
 			}
 		});
